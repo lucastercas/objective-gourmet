@@ -12,7 +12,7 @@ const Counter = () => {
   return (
     <div>
       <WinDialog
-        open={state.finished}
+        open={state.win}
         click={() => dispatch({ type: "restart" })}
         node={state.currentNode}
       />
