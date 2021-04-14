@@ -1,3 +1,12 @@
+export interface TreeNode {
+  name: String;
+  left?: TreeNode;
+  right?: TreeNode;
+}
+
 export interface Tree {
-  count: number;
+  currentNode: TreeNode;
+  rootNode: TreeNode;
+  win: boolean
+  lose: boolean
 }
