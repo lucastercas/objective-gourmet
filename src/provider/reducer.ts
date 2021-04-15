@@ -1,62 +1,47 @@
-import { Tree, TreeNode } from "./Tree";
+import { State } from "../model/State";
+import { TreeNode } from "../model/TreeNode";
 
-interface IAction {
-  type: string;
-  payload?: number;
-}
-
-export function reducer(state: Tree, action: any): Tree {
+export function reducer(state: State, action: any): State {
   switch (action.type) {
     case "restart":
-      console.log("restart");
-      return {
-        ...state,
-        currentNode: state.rootNode,
-        win: false,
-        lose: false,
-      };
-    case "yes":
-      console.log("yes");
-      return {
-        ...state,
-        win: true,
-      };
-
-    case "no":
-      console.log("no");
-      if (state.currentNode.left) {
+      if (state.win) {
         return {
           ...state,
-          currentNode: state.currentNode.left,
+          currentNode: state.rootNode,
+          win: false,
+          lose: false,
         };
       } else {
-        const newNode: TreeNode = {
-          name: "New Node Left",
-        };
+        const newTrait = new TreeNode(action.payload.trait, false);
+        const newFood = new TreeNode(action.payload.name, true);
+        newTrait.setLeft(newFood);
+        newTrait.setRight(state.currentNode);
+        state.currentNode.addNode(newTrait);
         return {
           ...state,
-          currentNode: newNode,
+          win: false,
+          lose: false,
+          currentNode: state.rootNode,
         };
+      }
+
+    case "yes":
+      if (state.currentNode.isDish) {
+        return { ...state, win: true };
+      } else {
+        return {
+          ...state,
+          currentNode: state.currentNode.left!,
+        };
+      }
+
+    case "no":
+      if (state.currentNode.isDish) {
+        return { ...state, lose: true };
+      } else {
+        return { ...state, currentNode: state.currentNode.right! };
       }
     default:
       throw new Error();
   }
-}
-
-export function init(initialCount: number): Tree {
-  const newNode: TreeNode = {
-    name: "Massa",
-    left: {
-      name: "Bolo de Chocolate",
-    },
-    right: {
-      name: "Lasanha",
-    },
-  };
-  return {
-    currentNode: newNode,
-    rootNode: newNode,
-    win: false,
-    lose: false,
-  };
 }

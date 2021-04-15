@@ -1,11 +1,10 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Counter from "./Components/Counter/Counter";
 
 const App = () => {
   return (
     <div className="App">
       <Counter />
-      <body></body>
     </div>
   );
 };

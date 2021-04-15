@@ -2,7 +2,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import React from "react";
 import { List, ListItem } from "@material-ui/core";
-import { TreeNode } from "../../provider/Tree";
+import { TreeNode } from "../../model/TreeNode";
 
 interface IProps {
   open: boolean;
