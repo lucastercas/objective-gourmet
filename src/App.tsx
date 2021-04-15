@@ -1,10 +1,10 @@
 import React from "react";
-import Counter from "./Components/Counter/Counter";
+import Question from "./Components/Question/Question";
 
 const App = () => {
   return (
     <div className="App">
-      <Counter />
+      <Question />
     </div>
   );
 };

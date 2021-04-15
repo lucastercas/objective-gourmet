@@ -1,3 +1,11 @@
+import {
+  Box,
+  Button,
+  Container,
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import React, { useReducer } from "react";
 import { State } from "../../model/State";
 import { TreeNode } from "../../model/TreeNode";
@@ -24,23 +32,50 @@ function init(): State {
   };
 }
 
-const Counter = () => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        justifyContent: "center",
+      },
+    },
+  })
+);
+
+const Question = () => {
   const [state, dispatch] = useReducer(reducer, 0, init);
+  const classes = useStyles();
 
   return (
-    <div>
+    <Container maxWidth="sm">
+      <Box color="text.primary">Pense em um prato que gosta!</Box>
+      <Box>O prato que voce pensou é {state.currentNode.name}?</Box>
+      <div className={classes.root}>
+        <Button
+          onClick={() => dispatch({ type: "yes" })}
+          variant="contained"
+          color="primary"
+        >
+          Sim
+        </Button>
+        <Button
+          onClick={() => dispatch({ type: "no" })}
+          variant="contained"
+          color="secondary"
+        >
+          Não
+        </Button>
+      </div>
+
       <WinDialog
         open={state.win}
         click={() => dispatch({ type: "restart" })}
         node={state.currentNode}
       />
       <LoseDialog open={state.lose} click={dispatch} />
-      <p>Pense em um prato que gosta!</p>
-      <p>O prato que voce pensou é {state.currentNode.name}?</p>
-      <button onClick={() => dispatch({ type: "yes" })}>Sim</button>
-      <button onClick={() => dispatch({ type: "no" })}>Nao</button>
-    </div>
+    </Container>
   );
 };
 
-export default Counter;
+export default Question;

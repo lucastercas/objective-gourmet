@@ -16,6 +16,7 @@ export function reducer(state: State, action: any): State {
         const newFood = new TreeNode(action.payload.name, true);
         newTrait.setLeft(newFood);
         newTrait.setRight(state.currentNode);
+        newFood.setParent(newTrait);
         state.currentNode.addNode(newTrait);
         return {
           ...state,

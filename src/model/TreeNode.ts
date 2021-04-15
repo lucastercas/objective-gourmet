@@ -35,10 +35,10 @@ export class TreeNode {
   }
 
   public addNode(newTrait: TreeNode) {
-    if (this.parent!.left == this) {
-      this.parent!.setLeft(newTrait);
+    if (this._parent!.left === this) {
+      this._parent!.setLeft(newTrait);
     } else {
-      this.parent!.setRight(newTrait);
+      this._parent!.setRight(newTrait);
     }
     this._parent = newTrait
   }

@@ -1,7 +1,7 @@
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import React from "react";
-import { List, ListItem } from "@material-ui/core";
+import { Button, List, ListItem } from "@material-ui/core";
 import { TreeNode } from "../../model/TreeNode";
 
 interface IProps {
@@ -17,9 +17,9 @@ const WinDialog = (props: IProps) => {
         Acertei! Voce pensou em {props.node.name}
       </DialogTitle>
       <List>
-        <ListItem autoFocus button onClick={props.click}>
+        <Button variant="contained" color="primary" onClick={props.click}>
           Continuar
-        </ListItem>
+        </Button>
       </List>
     </Dialog>
   );
